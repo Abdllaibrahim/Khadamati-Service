@@ -27,7 +27,10 @@ namespace Khadamati.DAL
             List<SiteUser> users = new List<SiteUser>();
             foreach (string id in ids)
             {
-                users.Add(GetUserById(id));
+                if (!Context.UserClaims.Where(i => i.UserId == id).Select(i => i.ClaimValue).ToList().Contains("Manger"))
+                { 
+                    users.Add(GetUserById(id)); 
+                }
             }
             return users;
         }
@@ -44,7 +47,7 @@ namespace Khadamati.DAL
                 .Include(i=>i.Bookmarks).ThenInclude(b=>b.Service)
                 .Include(i=>i.UserRequests).ThenInclude(b => b.Service)
                 .Include(i=>i.Notifications)
-                .Include(i=>i.Ratings)
+                .Include(i=>i.Ratings).ThenInclude(r=>r.Service)
                 .FirstOrDefault(i=>i.Id==id)!;
         }
         public SiteUser UserBookMarks(string id)

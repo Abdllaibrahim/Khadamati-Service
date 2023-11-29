@@ -9,7 +9,7 @@
         }
         public BookMark returnBookmark(string uid,int sid)
         {
-            return Context.Set<BookMark>().Find(uid, sid);
+            return Context.Set<BookMark>().Find(sid, uid);
         }
     }
 }

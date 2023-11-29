@@ -8,5 +8,6 @@ public interface IServiceRepo
     void Update(Service service);
     void DeleteById(int id);
     Service? GetDetailsById(int id);
+    List<Service> GetSpecificDetails(string loction, string categoryName);
     int SaveDbChange();
 }

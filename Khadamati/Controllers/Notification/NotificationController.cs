@@ -39,7 +39,7 @@ namespace Khadamati.Controllers
         public ActionResult AddNotification(NotificationAddDto notification)
         {
             _notificationRepo.AddNotification(notification);
-            return Ok();
+            return StatusCode(StatusCodes.Status201Created);
         }
 
 

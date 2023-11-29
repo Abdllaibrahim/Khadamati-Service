@@ -48,7 +48,12 @@ namespace Khadamati
             return SiteuserManger.GetUser(ID);
         }
         [HttpGet]
-        [Authorize(Policy = "UserPolicy")]
+        [Route("GetDetailsbyIDSync")]
+        public ActionResult<UserDetailsDTO> GetDetailsbyID(string ID)
+        {
+            return SiteuserManger.GetUserDetails(ID);
+        }
+        [HttpGet]
         [Route("GetDetailsbyID")]
         public async Task<ActionResult<UserDetailsDTO>> GetDetailsbyID()
         {
@@ -191,6 +196,31 @@ namespace Khadamati
             return StatusCode(StatusCodes.Status201Created);
         }
         [HttpPost]
+        [Route("Manger/Register")]
+        public async Task<ActionResult> MangerRegister(UserAddDTO registerDto)
+        {
+            var user = new SiteUser
+            {
+                UserName = registerDto.UserName,
+                PhoneNumber = registerDto.Phone,
+                Email = registerDto.Email,
+                Location = registerDto.Location,
+            };
+            var result = await UserManager.CreateAsync(user, registerDto.Password);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            var claimsLsit = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier,user.Id),
+                new Claim(ClaimTypes.Role,"Admin"),
+                new Claim(ClaimTypes.Role,"Manger")
+            };
+            await UserManager.AddClaimsAsync(user, claimsLsit);
+            return StatusCode(StatusCodes.Status201Created);
+        }
+        [HttpPost]
         [Route("AddBookmark")]
         public async Task<ActionResult> AddBookMark(int serviceID)
         {
@@ -206,5 +236,17 @@ namespace Khadamati
             SiteuserManger.RemoveBookmark(user.Id, serviceID);
             return StatusCode(StatusCodes.Status201Created);
         }
+        [HttpPost]
+        [Route("Claims")]
+        public async Task<ActionResult> UserClaims()
+        {
+            ; var user = await UserManager.GetUserAsync(User);
+            var claimsList = await UserManager.GetClaimsAsync(user);
+            return Ok(new
+            {
+                userclaims = claimsList.Select(i => i.Value),
+            });
+        }
+
     }
 }

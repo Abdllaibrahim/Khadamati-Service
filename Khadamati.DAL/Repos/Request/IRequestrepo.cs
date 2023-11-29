@@ -16,6 +16,6 @@
         void Update(ServiceRequest request);
 
         List<ServiceRequest> GetRequestDetails(int RequestId);
-
+        List<ServiceRequest>? GetAllWithDetails();
     }
 }

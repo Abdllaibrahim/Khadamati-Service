@@ -25,6 +25,7 @@ namespace Khadamati.BLL
         {
             List<UserReadDto> us = Unitofwork.UserRepo.GetAllAdmins().Select(i => new UserReadDto
             {
+                Id= i.Id,
                 UserName = i.UserName,
                 Phone = i.PhoneNumber,
                 Email = i.Email
@@ -36,6 +37,7 @@ namespace Khadamati.BLL
         {
             List<UserReadDto> us = Unitofwork.UserRepo.GetAllUsers().Select(i => new UserReadDto
             {
+                Id = i.Id,
                 UserName = i.UserName,
                 Phone = i.PhoneNumber,
                 Email = i.Email
@@ -47,6 +49,7 @@ namespace Khadamati.BLL
         {
             List<UserReadDto> us = Unitofwork.UserRepo.GetAll().Select(i => new UserReadDto
             {
+                Id = i.Id,
                 UserName = i.UserName,
                 Phone = i.PhoneNumber,
                 Email = i.Email
@@ -131,7 +134,7 @@ namespace Khadamati.BLL
         public UserReadDto GetUser(string id)
         {
             SiteUser s = Unitofwork.UserRepo.GetUserById(id);
-            return new() { UserName = s.UserName, Phone = s.PhoneNumber, Email = s.Email };
+            return new() { Id = id, UserName = s.UserName, Phone = s.PhoneNumber, Email = s.Email };
         }
 
         public void UpateUserData(string id, UserUpdateDto siteUser)
@@ -149,6 +152,7 @@ namespace Khadamati.BLL
         {
             Unitofwork.BookmarkRepo.Add(new BookMark()
             { UserId = UserID, ServiceId = serviceID });
+            Unitofwork.SaveChanges();
         }
 
         public void RemoveUser(string id)
@@ -220,6 +224,7 @@ namespace Khadamati.BLL
         {
             BookMark bookMark = Unitofwork.BookmarkRepo.returnBookmark(id, serviceID);
             Unitofwork.BookmarkRepo.RemoveEntity(bookMark);
+            Unitofwork.SaveChanges();
         }
     }
 }

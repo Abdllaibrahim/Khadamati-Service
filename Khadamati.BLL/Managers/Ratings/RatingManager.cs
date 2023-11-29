@@ -10,7 +10,19 @@ namespace Khadamati.BLL.Managers.Ratings
         {
             _ratingrepo = rr;
         }
+        public RatingDto GetRatingByUserAndService(int sid, string uid)
+        {
+            {
+                var rating = _ratingrepo.RatingRepo.GetRatingByUserAndService(sid, uid);
+                return new RatingDto
+                {
+                    Id = rating.Id,
+                    UserName = rating.User.UserName,
+                    date = rating.date
+                };
 
+            }
+        }
         public List<RatingDto> GetRatingByServiceId(int id)
         {
             {
@@ -83,7 +95,7 @@ namespace Khadamati.BLL.Managers.Ratings
                 UserId = rating.UserId,
                 Comment = rating.Comment,
                 rating = rating.rating,
-                date = (DateTime)rating.date,
+                date = DateTime.Now,
             });
         }
     }

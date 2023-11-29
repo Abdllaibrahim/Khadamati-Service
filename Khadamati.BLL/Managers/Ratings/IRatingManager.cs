@@ -7,5 +7,6 @@
         void UpdateRating(RatingDto rating);
         List<RatingDto> GetRatingByServiceId(int id);
         RatingDto GetRatingById(int id);
+        RatingDto GetRatingByUserAndService(int sid, string uid);
     }
 }

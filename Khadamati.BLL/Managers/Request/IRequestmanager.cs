@@ -14,4 +14,5 @@ public interface IRequestmanager
     List<RequestDetailsDTO> GetbyIdDetails(int DetailsId);
 
     List<RequestDetailsDTO> GetbyProviderId(string ProviderId);
+    List<RequestDetailsDTO> GetAll();
 }

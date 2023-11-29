@@ -15,7 +15,15 @@ namespace Khadamati.DAL
         {
             _context.Set<ServiceRequest>().Add(request);
         }
-
+        public List<ServiceRequest>? GetAllWithDetails()
+        {
+            return _context.Set<ServiceRequest>().
+               Include(d => d.Service)
+               .Include(d => d.Service)
+               .Include(p => p.User)
+               .Include(p => p.Provider)
+               .ToList();
+        }
         public ServiceRequest GetbyId(int Id)
         {
             return _context.Set<ServiceRequest>().Where(d => d.Id == Id).FirstOrDefault();

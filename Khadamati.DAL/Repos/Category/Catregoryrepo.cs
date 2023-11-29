@@ -28,13 +28,18 @@ public class Catregoryrepo:ICategoryrepo
 
     public Category GetbyID(int id)
     {
-        return _context.Set<Category>().Where(d => d.Id == id).FirstOrDefault();
+        return _context.Set<Category>().Find(id);
     }
 
     public void Remove(Category category)
     {
-        if (category != null)
+        if (category != null&&_context.Categories.Count()!=0)
         {
+            List<Service>s=_context.Services.Where(s => s.CategoryId== category.Id).ToList();
+            foreach(Service service in s)
+            {
+                service.CategoryId = _context.Categories.FirstOrDefault(s=>s.Id!=category.Id).Id;
+            }
             _context.Set<Category>().Remove(category);
         }
     }

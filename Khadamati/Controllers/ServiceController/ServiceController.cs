@@ -39,31 +39,17 @@ public class ServiceController : ControllerBase
         return service;
     }
     [HttpPost]
+    [Route("Approve/{id}")]
+    public ActionResult Add(int id)
+    {
+        _serviceManager.approve(id);
+        return StatusCode(StatusCodes.Status202Accepted);
+    }
+    [HttpPost]
     public ActionResult Add(AddServiceDTO service)
     {
         _serviceManager.Add(service);
         return StatusCode(StatusCodes.Status201Created);
-    }
-    [HttpPost]
-    [Route("{Picture}")]
-    public ActionResult AddPicture(PictureAddDto dto)
-    {
-        _serviceManager.Addpicture(dto);
-        return StatusCode(StatusCodes.Status201Created);
-    }
-    [HttpDelete]
-    [Route("Picture/{Picture}")]
-    public ActionResult RemovePicture(int id)
-    {
-        _serviceManager.RemovePicture(id);
-        return StatusCode(StatusCodes.Status201Created);
-    }
-    [HttpPut]
-    [Route("Picture/{Picture}")]
-    public ActionResult UpdatePicture(PictureUpdateDTO picture)
-    {
-        _serviceManager.UpdatePicture(picture);
-        return StatusCode(StatusCodes.Status202Accepted);
     }
     [HttpPut]
     public ActionResult Edit(UpdateServiceDTO service)
@@ -100,5 +86,27 @@ public class ServiceController : ControllerBase
        }
         return service;
     }
-    
+
+    [HttpGet]
+    [Route("SpecificDetails")]
+    public ActionResult<List<GetSpecificServicesDetailsDTO>> GetSpecificDetails(string loction, string category)
+    {
+        var service = _serviceManager.GetSpecificDetails(loction, category);
+        if (service == null)
+        {
+            return NotFound();
+        }
+        return service;
+    }
+    [HttpGet]
+    [Route("Search")]
+    public ActionResult<List<GetAllServicesDetailsDTO>> GetSearch(string loction, string category)
+    {
+        var service = _serviceManager.GetSearch(loction, category);
+        if (service == null)
+        {
+            return NotFound();
+        }
+        return service;
+    }
 }

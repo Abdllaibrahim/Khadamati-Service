@@ -10,7 +10,7 @@ public interface IServiceManager
     bool Update(UpdateServiceDTO service);
     void DeleteById(int id);
     GetServiceDetailsByIdDTO? GetDetailsById(int id);
-    void Addpicture(PictureAddDto pictureAdd);
-    void RemovePicture(int id);
-    void UpdatePicture(PictureUpdateDTO updateDTO);
+    List<GetSpecificServicesDetailsDTO> GetSpecificDetails(string loction, string categoryName);
+    bool approve(int id);
+    List<GetAllServicesDetailsDTO> GetSearch(string loction, string categoryName);
 }

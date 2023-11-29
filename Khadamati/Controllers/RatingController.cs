@@ -13,6 +13,11 @@ namespace Khadamati.Controllers
         {
             _ratingRepo = ratingRepo;
         }
+        [HttpGet]
+        public ActionResult<RatingDto> GetRatingByUserAndService(int sid, string uid)
+        {
+            return _ratingRepo.GetRatingByUserAndService(sid, uid);
+        }
         [HttpGet("id")]
         public ActionResult<RatingDto> GetRatingById(int id)
         {

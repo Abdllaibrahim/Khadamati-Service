@@ -11,7 +11,7 @@ namespace Khadamati.Controllers
         private IRequestmanager _manager;
         public RequestController(IRequestmanager manager)
         {
-                _manager = manager;
+            _manager = manager;
         }
         [HttpPost]
         public ActionResult Add(RequestAddDTO request)
@@ -23,7 +23,7 @@ namespace Khadamati.Controllers
         public ActionResult Update(RequestUpdateDTO request)
         {
             var isFound = _manager.Update(request);
-            if(!isFound) { return NotFound(); }
+            if (!isFound) { return NotFound(); }
             return NoContent();
         }
         [HttpDelete]
@@ -37,8 +37,8 @@ namespace Khadamati.Controllers
 
         [HttpGet]
         [Route("Provider/{providerid}")]
-        public ActionResult<List<RequestDetailsDTO>> GetbyProviderId(string providerid) 
-        { 
+        public ActionResult<List<RequestDetailsDTO>> GetbyProviderId(string providerid)
+        {
             List<RequestDetailsDTO> request = _manager.GetbyProviderId(providerid);
             if (request == null) return NotFound();
             return request;
@@ -51,7 +51,7 @@ namespace Khadamati.Controllers
         [Route("User/{userid}")]
         public ActionResult<List<RequestDetailsDTO>> GetbyUserId(string userid)
         {
-            List <RequestDetailsDTO> request = _manager.GetbyUserId(userid);
+            List<RequestDetailsDTO> request = _manager.GetbyUserId(userid);
             if (request == null) return NotFound();
             return request;
 
@@ -62,10 +62,18 @@ namespace Khadamati.Controllers
         [Route("Id/{id}")]
         public ActionResult<List<RequestDetailsDTO>> GetbyIdDetails(int id)
         {
-            List <RequestDetailsDTO> request = _manager.GetbyIdDetails(id);
+            List<RequestDetailsDTO> request = _manager.GetbyIdDetails(id);
             if (request == null) return NotFound();
             return request;
 
+        }
+        [HttpGet]
+        [Route("GetAll")]
+        public ActionResult<List<RequestDetailsDTO>> GetAll()
+        {
+            List<RequestDetailsDTO> request = _manager.GetAll();
+            if (request == null) return NotFound();
+            return request;
         }
     }
 }

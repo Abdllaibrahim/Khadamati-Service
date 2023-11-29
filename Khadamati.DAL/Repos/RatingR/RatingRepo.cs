@@ -37,7 +37,12 @@ namespace Khadamati.DAL
             _db.Ratings.Update(rating);
             _db.SaveChanges();
         }
-        
 
+        public Rating GetRatingByUserAndService(int sid, string uid)
+        {
+            var rating = _db.Ratings.Where(r => r.ServiceId == sid && r.UserId == uid)
+            .Include(r => r.User).FirstOrDefault();
+            return rating;
+        }
     }
 }

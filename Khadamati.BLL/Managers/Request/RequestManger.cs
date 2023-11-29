@@ -18,7 +18,8 @@ public class RequestManger : IRequestmanager
             UserId = RequestFromRequest.UserId,
             ProviderId = _repo.ServiceRepo.GetById(RequestFromRequest.ServiceId.Value).ProviderId,
             Status = "Waiting",
-            ServiceId = RequestFromRequest.ServiceId
+            ServiceId = RequestFromRequest.ServiceId,
+            date=DateTime.Now
         };
         _repo.RequestRepo.Add(request);
         _repo.SaveChanges();
@@ -42,14 +43,23 @@ public class RequestManger : IRequestmanager
             Id = i.Id,
             RequestText = i.RequestText,
             date = i.date,
-            ProviderDetails = new RequestChildProviderDetailsDTO { ProviderName = i.Provider.UserName },
+            ProviderDetails = new RequestChildProviderDetailsDTO 
+            { 
+                ProviderName = i.Provider.UserName,
+                ProviderID=i.ProviderId
+            },
             ServiceDetails = new RequestChildServiceDetailsDTO
             {
                 Name = i.Service.Name,
                 Id = i.Service.Id
             },
             Status= i.Status,
-            UserDetails = new RequestChildUserDetailsDTO { UserName = i.User.UserName }
+            UserDetails = new RequestChildUserDetailsDTO 
+            {
+                UserName = i.User.UserName,
+                UserID = i.UserId,
+                UserPhone = i.User.PhoneNumber
+            }
         }
         ).ToList();
         if (request == null) return null;
@@ -57,6 +67,35 @@ public class RequestManger : IRequestmanager
         return request;
     }
 
+    public List<RequestDetailsDTO> GetAll()
+    {
+        List<RequestDetailsDTO> request = _repo.RequestRepo.GetAllWithDetails().Select(i =>
+        new RequestDetailsDTO
+        {
+            Id = i.Id,
+            RequestText = i.RequestText,
+            date = i.date,
+            ProviderDetails = new RequestChildProviderDetailsDTO
+            {
+                ProviderName = i.Provider.UserName,
+                ProviderID = i.ProviderId
+            },
+            ServiceDetails = new RequestChildServiceDetailsDTO
+            {
+                Name = i.Service.Name,
+                Id = i.Service.Id
+            },
+            Status = i.Status,
+            UserDetails = new RequestChildUserDetailsDTO
+            {
+                UserName = i.User.UserName,
+                UserID = i.UserId,
+                UserPhone = i.User.PhoneNumber
+            }
+        }
+        ).ToList();
+        return request;
+    }
     public List<RequestDetailsDTO> GetbyProviderId(string ProviderId)
     {
         List <RequestDetailsDTO> request = _repo.RequestRepo.GetbyProviderId(ProviderId).Select(i => 
@@ -65,14 +104,23 @@ public class RequestManger : IRequestmanager
             Id = i.Id,
             RequestText = i.RequestText,
             date = i.date,
-            ProviderDetails = new RequestChildProviderDetailsDTO { ProviderName = i.Provider.UserName },
+            ProviderDetails = new RequestChildProviderDetailsDTO
+            {
+                ProviderName = i.Provider.UserName,
+                ProviderID = i.ProviderId
+            },
             ServiceDetails = new RequestChildServiceDetailsDTO
             {
                 Name = i.Service.Name,
                 Id = i.Service.Id
             },
             Status = i.Status,
-            UserDetails = new RequestChildUserDetailsDTO { UserName = i.User.UserName }
+            UserDetails = new RequestChildUserDetailsDTO
+            {
+                UserName = i.User.UserName,
+                UserID = i.UserId,
+                UserPhone = i.User.PhoneNumber
+            }
         }
         ).ToList();
         if (request == null) return null;
@@ -89,14 +137,23 @@ public class RequestManger : IRequestmanager
             Id = i.Id,
             RequestText = i.RequestText,
             date = i.date,
-            ProviderDetails = new RequestChildProviderDetailsDTO { ProviderName = i.Provider.UserName },
+            ProviderDetails = new RequestChildProviderDetailsDTO
+            {
+                ProviderName = i.Provider.UserName,
+                ProviderID = i.ProviderId
+            },
             ServiceDetails = new RequestChildServiceDetailsDTO
             {
                 Name = i.Service.Name,
                 Id = i.Service.Id
             },
             Status = i.Status,
-            UserDetails = new RequestChildUserDetailsDTO { UserName = i.User.UserName }
+            UserDetails = new RequestChildUserDetailsDTO
+            {
+                UserName = i.User.UserName,
+                UserID = i.UserId,
+                UserPhone = i.User.PhoneNumber
+            }
         }
         ).ToList();
         if (request == null) return null;

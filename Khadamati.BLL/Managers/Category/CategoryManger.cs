@@ -1,15 +1,7 @@
-﻿using Azure.Core;
-using Khadamati.BLL.DTO.Category;
-using Khadamati.BLL.Managers;
+﻿using Khadamati.BLL.DTO.Category;
 using Khadamati.BLL.Managers.Category;
-
 using Khadamati.DAL;
-using Khadamati.DAL.Repos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Khadamati.BLL;
 

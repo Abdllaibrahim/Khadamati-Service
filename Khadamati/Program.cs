@@ -73,6 +73,7 @@ builder.Services.AddScoped<IRequestmanager, RequestManger>();
 builder.Services.AddScoped<ICategoryManger, CategoryManger>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<IRatingManager, RatingManager>();
+builder.Services.AddScoped<IPictureManager, PictureManager>();
 builder.Services.AddScoped<INotificationManager, NotificationManager>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IBookMarkRepo, BookMarkRepo>();

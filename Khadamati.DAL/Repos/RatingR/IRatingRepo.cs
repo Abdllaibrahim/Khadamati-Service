@@ -7,5 +7,6 @@
         public void Update(Rating rating);
         public List<Rating> GetRatingByServiceId(int id);
         public Rating GetRatingById(int id);
+        Rating GetRatingByUserAndService(int sid, string uid);
     }
 }
