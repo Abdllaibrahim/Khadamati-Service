@@ -1,4 +1,7 @@
+
 # Khadamati
+![localhost_4200_](https://github.com/Abdllaibrahim/Khadamati-Service/assets/54725888/d4710dea-498c-4b08-b882-47a9351b8011)
+
 Service Platform Web Application Overview Our state-of-the-art web application is meticulously crafted using cutting-edge .NET technologies, exemplifying a seamless integration of C#, SQL Server, Angular, JavaScript, LINQ, Web API, and ASP.NET. Focused on revolutionizing the online service marketplace, our platform draws inspiration from established models like OLX, yet uniquely tailors its approach to cater exclusively to the dynamic service industry.
 
 In the backend, the robust .NET framework, driven by C#, forms the bedrock of our application, ensuring unparalleled scalability and performance. The inclusion of SQL Server elevates data management standards, safeguarding data integrity and fortifying security measures. The adept use of ASP.NET, coupled with Web API, orchestrates flawless communication between the frontend and backend, resulting in a responsive and dependable user interface.
